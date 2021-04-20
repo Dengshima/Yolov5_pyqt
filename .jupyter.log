@@ -1,0 +1,57 @@
+[I 2021-04-13 13:53:31.849 ServerApp] jupyterlab | extension was successfully linked.
+[I 2021-04-13 13:53:32.685 ServerApp] nbclassic | extension was successfully linked.
+[I 2021-04-13 13:53:33.407 LabApp] JupyterLab extension loaded from /home/dsm/anaconda3/envs/yolov5/lib/python3.7/site-packages/jupyterlab
+[I 2021-04-13 13:53:33.407 LabApp] JupyterLab application directory is /home/dsm/anaconda3/envs/yolov5/share/jupyter/lab
+[I 2021-04-13 13:53:33.410 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2021-04-13 13:53:33.414 ServerApp] nbclassic | extension was successfully loaded.
+[I 2021-04-13 13:53:33.414 ServerApp] Serving notebooks from local directory: /home/dsm/codes/qt5_Detection
+[I 2021-04-13 13:53:33.415 ServerApp] Jupyter Server 1.4.1 is running at:
+[I 2021-04-13 13:53:33.415 ServerApp] http://localhost:8888/lab
+[I 2021-04-13 13:53:33.415 ServerApp]  or http://127.0.0.1:8888/lab
+[I 2021-04-13 13:53:33.415 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[I 2021-04-13 13:53:36.483 ServerApp] 302 GET / (127.0.0.1) 0.58ms
+[I 2021-04-13 13:53:41.053 LabApp] Build is up to date
+[W 2021-04-13 13:53:43.507 ServerApp] 404 GET /api/contents/qt5_Detection/weights?1618293223502 (127.0.0.1): No such file or directory: qt5_Detection/weights
+[W 2021-04-13 13:53:43.507 ServerApp] No such file or directory: qt5_Detection/weights
+[W 2021-04-13 13:53:43.507 ServerApp] 404 GET /api/contents/qt5_Detection/weights?1618293223502 (127.0.0.1) 1.05ms referer=http://localhost:8888/lab?
+[I 2021-04-13 13:54:11.118 ServerApp] New terminal with automatic name: 1
+TermSocket.open: 1
+TermSocket.open: Opened 1
+[W 2021-04-13 13:54:33.270 ServerApp] Notebook Untitled.ipynb is not trusted
+[I 2021-04-13 13:54:33.785 ServerApp] Kernel started: ebbf2fe6-c678-4d1a-a5b3-cf46b2dcd845
+[I 2021-04-13 13:54:40.041 ServerApp] Saving file at /Untitled.ipynb
+[W 2021-04-13 13:55:35.380 ServerApp] Notebook Untitled.ipynb is not trusted
+[W 2021-04-13 13:55:40.135 ServerApp] Notebook Yolov5/Untitled.ipynb is not trusted
+[I 2021-04-13 13:55:40.359 ServerApp] Kernel started: f92fa828-b2f7-4e11-9c27-472d90045a3c
+[I 2021-04-13 13:55:41.854 ServerApp] Saving file at /Yolov5/Untitled.ipynb
+[I 2021-04-13 13:55:51.515 ServerApp] Saving file at /Yolov5/Untitled.ipynb
+[I 2021-04-13 13:56:00.450 ServerApp] Saving file at /Yolov5/Untitled.ipynb
+[I 2021-04-13 13:56:01.834 ServerApp] Saving file at /Yolov5/Untitled.ipynb
+[I 2021-04-13 13:56:33.986 ServerApp] Saving file at /Yolov5/Untitled.ipynb
+[I 2021-04-13 13:56:48.450 ServerApp] Saving file at /Yolov5/Untitled.ipynb
+[I 2021-04-13 13:56:56.715 ServerApp] Saving file at /Yolov5/Untitled.ipynb
+[I 2021-04-13 13:57:10.230 ServerApp] Saving file at /Yolov5/Untitled.ipynb
+[I 2021-04-13 13:57:28.354 ServerApp] Starting buffering for f92fa828-b2f7-4e11-9c27-472d90045a3c:dcc849b8-67bb-4fa4-8d63-4628d466e2ee
+Websocket closed
+[I 2021-04-13 13:57:32.989 ServerApp] Starting buffering for ebbf2fe6-c678-4d1a-a5b3-cf46b2dcd845:1cad8d8f-6ba6-45be-948f-43acb8dea884
+[I 2021-04-13 14:00:01.102 ServerApp] 302 GET / (127.0.0.1) 0.46ms
+[I 2021-04-13 14:00:05.416 LabApp] Build is up to date
+[W 2021-04-13 14:00:11.147 ServerApp] Notebook Untitled.ipynb is not trusted
+[I 2021-04-13 14:00:17.555 ServerApp] Starting buffering for ebbf2fe6-c678-4d1a-a5b3-cf46b2dcd845:85020ae4-348d-4c23-b392-49f4aebf4eee
+[W 2021-04-13 14:00:22.214 ServerApp] Notebook Yolov5/Untitled.ipynb is not trusted
+[I 2021-04-13 14:01:26.120 ServerApp] Saving file at /Yolov5/Untitled.ipynb
+[W 2021-04-13 14:01:37.421 ServerApp] delete /weights/best_13-1_new.pt
+[I 2021-04-13 14:01:45.540 ServerApp] Saving file at /Yolov5/Untitled.ipynb
+[I 2021-04-13 14:01:48.597 ServerApp] Saving file at /Yolov5/Untitled.ipynb
+[I 2021-04-13 14:01:55.676 ServerApp] Saving file at /Yolov5/Untitled.ipynb
+[I 2021-04-13 14:02:02.142 ServerApp] Saving file at /Yolov5/Untitled.ipynb
+[I 2021-04-13 14:02:10.136 ServerApp] Saving file at /Yolov5/Untitled.ipynb
+[I 2021-04-13 14:02:16.313 ServerApp] Saving file at /Yolov5/Untitled.ipynb
+[I 2021-04-13 14:02:26.970 ServerApp] Saving file at /Yolov5/Untitled.ipynb
+[I 2021-04-13 14:02:33.782 ServerApp] Saving file at /Yolov5/Untitled.ipynb
+[I 2021-04-13 14:04:02.295 ServerApp] Saving file at /Yolov5/Untitled.ipynb
+[I 2021-04-13 14:04:06.723 ServerApp] Starting buffering for f92fa828-b2f7-4e11-9c27-472d90045a3c:b26bb01e-b500-49c9-b27c-c31b24262da5
+[C 2021-04-13 15:12:58.872 ServerApp] received signal 15, stopping
+[I 2021-04-13 15:12:58.903 ServerApp] Shutting down 2 kernels
+[I 2021-04-13 15:12:59.940 ServerApp] Kernel shutdown: ebbf2fe6-c678-4d1a-a5b3-cf46b2dcd845
+[I 2021-04-13 15:13:00.041 ServerApp] Kernel shutdown: f92fa828-b2f7-4e11-9c27-472d90045a3c

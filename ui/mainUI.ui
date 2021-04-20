@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1440</width>
+    <height>900</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Detect</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+QTreeWidget {border:None} 
+    QTreeWidget::Item{
+		font-size: 14pt;
+/*
+		border-bottom:2px solid black;
+        color: rgba(255,255,255,255);
+*/
+    }
+    QTreeView{
+		/* 
+        alternate-background-color: rgba(170,170,170,255);
+		*/
+		font-size: 14pt;
+/*
+		background: rgba(211,211,211,255);
+		background: rgba(211,211,211,255);
+*/
+    }</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QWidget" name="widget" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>3</horstretch>
+          <verstretch>1</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Noto Sans</family>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QTreeWidget" name="treeWidget">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <column>
+            <property name="text">
+             <string>菜单</string>
+            </property>
+            <property name="font">
+             <font>
+              <family>3270Medium Nerd Font</family>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
+           </column>
+           <item>
+            <property name="text">
+             <string>文件</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>打开文件</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>关闭文件</string>
+             </property>
+            </item>
+           </item>
+           <item>
+            <property name="text">
+             <string>图像处理</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>大图切割</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>亮度增强</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>图像去雾</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>小图合并</string>
+             </property>
+            </item>
+           </item>
+           <item>
+            <property name="text">
+             <string>模型</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>选择模型</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>增量训练</string>
+             </property>
+             <item>
+              <property name="text">
+               <string>参数设置</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>开始训练</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>终止训练</string>
+              </property>
+             </item>
+            </item>
+            <item>
+             <property name="text">
+              <string>执行检测</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>模型剪枝</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>重置默认</string>
+             </property>
+            </item>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QWidget" name="widget_2" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>18</horstretch>
+          <verstretch>1</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_7">
+         <item row="0" column="0">
+          <layout class="QGridLayout" name="gridLayout_4" columnstretch="1,15">
+           <item row="0" column="0">
+            <widget class="QWidget" name="widget_5" native="true">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_6">
+              <item row="0" column="0">
+               <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,1,1,1,1,0,18">
+                <item>
+                 <widget class="QComboBox" name="comboBox">
+                  <item>
+                   <property name="text">
+                    <string>深度学习目标检测识别模型(RGB)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>基于样本迁移的目标检测识别模型(RGB)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>基于特征迁移的目标检测识别模型(PAN)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>基于模型迁移的目标检测识别模型(IR)</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_7" native="true">
+                  <layout class="QGridLayout" name="gridLayout_10">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="label">
+                     <property name="text">
+                      <string>水平重叠率</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_8" native="true">
+                  <layout class="QGridLayout" name="gridLayout_11">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="label_2">
+                     <property name="text">
+                      <string>垂直重叠率</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButton">
+                  <property name="styleSheet">
+                   <string notr="true"/>
+                  </property>
+                  <property name="text">
+                   <string>图像切割</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButton_2">
+                  <property name="styleSheet">
+                   <string notr="true"/>
+                  </property>
+                  <property name="text">
+                   <string>开始检测</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButton_4">
+                  <property name="text">
+                   <string>开始训练</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QTableWidget" name="tableWidget">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                    <horstretch>1</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <column>
+                   <property name="text">
+                    <string>目标类型</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>置信度</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </column>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QWidget" name="widget_6" native="true">
+             <layout class="QGridLayout" name="gridLayout_9">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_8" rowstretch="5,2">
+                <item row="0" column="0">
+                 <widget class="QWidget" name="widget_4" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_3">
+                   <item row="0" column="0">
+                    <layout class="QGridLayout" name="gridLayout_2"/>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QWidget" name="widget_3" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_5" columnstretch="1,10">
+                   <item row="0" column="0">
+                    <widget class="QWidget" name="widget_9" native="true">
+                     <layout class="QGridLayout" name="gridLayout_12">
+                      <item row="2" column="0">
+                       <widget class="QPushButton" name="pushButton_3">
+                        <property name="text">
+                         <string>清空输出</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="0">
+                       <widget class="QPushButton" name="pushButton_5">
+                        <property name="text">
+                         <string>训练窗口</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="0">
+                       <widget class="QProgressBar" name="progressBar">
+                        <property name="value">
+                         <number>0</number>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QTextBrowser" name="textBrowser">
+                     <property name="font">
+                      <font>
+                       <family>DejaVu Sans</family>
+                       <pointsize>12</pointsize>
+                      </font>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1440</width>
+     <height>33</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>3270Medium Nerd Font</family>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>程序</string>
+    </property>
+    <addaction name="action"/>
+   </widget>
+   <addaction name="menu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action">
+   <property name="text">
+    <string>退出</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>3270Medium Nerd Font</family>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

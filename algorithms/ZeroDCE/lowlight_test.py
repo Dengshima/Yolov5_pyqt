@@ -33,7 +33,7 @@ def lowlight(image_path):
         DCE_net = dce_model.enhance_net_nopool()
     # DCE_net.load_state_dict(torch.load('snapshots/Epoch99.pth'))
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-    DCE_net.load_state_dict(torch.load('ZeroDCE/snapshots/Epoch99.pth', map_location=device))
+    DCE_net.load_state_dict(torch.load('algorithms/ZeroDCE/snapshots/Epoch99.pth', map_location=device))
     start = time.time()
     _, enhanced_image, _ = DCE_net(data_lowlight)
 

@@ -10,7 +10,7 @@ import time
 from multiprocessing import Process, Queue
 # from tqdm import tqdm
 from PyQt5 import QtGui
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
 from PyQt5.QtCore import QThread
 from ui.mainUI import Ui_MainWindow
 from ui.trainParasMain import TrainWindow
@@ -236,8 +236,9 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         '''
         根据按钮名字，执行对应响应函数
         '''
-        # 当前有任务执行，点击不产生反应
+        # 当前有任务执行，点击显示警告弹窗，并返回
         if self.current_task is not None:
+            QMessageBox.warning(self, "标题", "请等待后台程序执行完毕")
             return
         try:
             # 根据按钮名称获取响应函数，并执行对应函数

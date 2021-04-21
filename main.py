@@ -129,6 +129,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
                 self.train_win.textBrowser.append(s)
             else:
                 self.train_win.textBrowser.append(s)
+        # 当消息队列中存在3个时，表示一个线程已经执行完成，需要显示线程执行的时间
         if self.time_queue.qsize() == 3:
             print('完成')
             string = self.time_queue.get()
@@ -174,7 +175,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         # 左侧树展开
         self.treeWidget.expandToDepth(0)
 
-        # 结果展示列表重置
+        # 结果展示列表
         self.tableWidget.setRowCount(0)
 
         # 共享变量的重置
@@ -216,6 +217,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         退出程序
         '''
         try:
+            # 退出之前先关闭训练进程
             self.train_pro.kill()
             self.train_pro.close()
         except Exception as e:
@@ -251,8 +253,6 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         打开一张图片
         '''
         self.tableWidget.setRowCount(0)
-        # 清空目录
-        # init_dir(self.config['output_dir'])
         # 选择打开选项，图片格式，所有文件，括号中使用匹配符号
         selected_filter = "Images (*.png *.jpg *.JPEG);;All Files(*)"
         imgName, imgType = QFileDialog.getOpenFileName(self, "打开图片", "", selected_filter)
@@ -260,6 +260,10 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         if len(imgName) == 0:
             return
         else:
+            '''
+            将sourceimage和images都设置为打开的图片,
+            调用showImages函数显示
+            '''
             self.reset(start=False)
             # 获取图片的相对路径
             imgName = imgName.replace(os.getcwd()+'/', '', 1)
@@ -281,14 +285,16 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         '''
         # 如果当前图片不是一张，则为误操作
         if len(self.images) != 1:
+            QMessageBox.warning(self, "标题", "当前无需进行切图操作")
             return
         # 获取设置的重叠率
         overlap_h = self.doubleSpinBox.value()
         overlap_v = self.doubleSpinBox_2.value()
+        # 调用切割图片的函数
         self.images = cropimage_overlap(self.images[0], self.colums,
                                         self.rows, self.config['temp'],
                                         h=overlap_h, v=overlap_v)
-        # self.showImages(self.images)
+        # 显示图片
         showImages(self.widget_4, self.gridLayout_2, self.colums, self.rows, self.images)
         self.tableWidget.setRowCount(0)
 
@@ -298,13 +304,15 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         showImages 显示
         '''
         if len(self.images) == 0:
+            QMessageBox.warning(self, "标题", "请先选择图片")
             return
         # 后台线程执行亮度增强函数
-        # 新建一个线程
+        # 新建一个线程和QObject，并使用moveToThread实现多线程
         self.lighten_th = QThread()
         self.lighten_wk = EnlightenWork(self.images)
         self.lighten_wk.moveToThread(self.lighten_th)
 
+        # 结束信号绑定函数
         self.lighten_th.started.connect(self.lighten_wk.run)
         self.lighten_wk.finished.connect(self.lighten_th.quit)
         self.lighten_wk.finished.connect(self.lighten_wk.deleteLater)
@@ -345,7 +353,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         init_dir(out_result)
         if len(self.images) == 0:
             return
-        print('going to remove fog:', self.images)
+        # 将图片移动到去雾算法所使用的路径中
         for file in self.images:
             try:
                 shutil.copy(file, target)
@@ -360,21 +368,20 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.time_queue.put('去雾耗时: ')
         self.time_queue.put(time.time())
 
-        # rf = removefog.RemoveFog(paths)
-        # rf.hazy()
-        # self.ridfog_result()
-
     def ridfog_result(self):
+        '''
+        去雾进程完成后，触发显示结果的函数
+        读取结果文件，并显示
+        '''
         out_result = self.config['fog_outdoor']
         image_names = [(out_result + '/' + name) for name in os.listdir(out_result)]
         image_names.sort()
         init_dir(self.config['temp'])
         results = []
+        # 将去雾的到的图片移动到统一的中间存储目录中
         for image in image_names:
             results.append(shutil.copy(image, self.config['temp']))
-        # self.images = image_names
         self.images = results
-        # self.showImages(self.images)
         print('remove fog result:', self.images)
         showImages(self.widget_4, self.gridLayout_2, self.colums, self.rows, self.images)
         self.tableWidget.setRowCount(0)
@@ -411,9 +418,8 @@ class MyWindow(QMainWindow, Ui_MainWindow):
             # 排除txt文件
             if name[-4:] != '.txt':
                 image_names.append(concat_path + '/' + name)
-        # image_names = [(concat_path + '/' + name) for name in os.listdir(concat_path)]
         image_names.sort()
-
+        # 根据重叠率合并图片
         img_result = concat_image(image_names, self.colums, self.rows,
                                   overlap_h=self.doubleSpinBox.value(),
                                   overlap_v=self.doubleSpinBox_2.value())
@@ -434,11 +440,8 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         根据单张图片还是多张图片，
         传入图片名或者路径
         '''
-        # start = time.time()
-
-        # 'RGB', 'PAN', 'IR'
-        # model_weight = self.models_dict[self.comboBox.currentText()]
         if len(self.images) == 0:
+            QMessageBox.warning(self, "错误", "当前无可以检测的图片")
             return
         detect_dir = os.path.dirname(self.images[0])
         self.detect_th = DetectThread([detect_dir, self.model_weight])
@@ -448,14 +451,14 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.time_queue.put('检测耗时: ')
         self.time_queue.put(time.time())
 
-        # end = time.time()
-        # cost_time = end - start
-        # self.textBrowser_2.append('检测耗时:' + str(cost_time) + 's')
-
     def detect_result(self, result):
+        '''
+        显示检测结果的函数
+        '''
         self.result = result
         init_dir(self.config['result'])
         result0 = []
+        # 将图片移动到存储结果文件的目录中,并显示
         for image in self.result:
             result0.append(shutil.copy(image, self.config['result']))
         self.result = result0
@@ -472,16 +475,25 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.train_win.exec_()
 
     def changetrain(self):
+        '''
+        训练进程控制按钮的响应函数,变换按钮状态
+        '''
         if self.pushButton_4.text() == '开始训练':
             self.train()
         else:
             self.stoptrain()
 
     def showtrain(self):
+        '''
+        显示训练程序的窗口
+        '''
         self.train_win.show()
         self.train_win.exec()
 
     def stoptrain(self):
+        '''
+        停止训练函数
+        '''
         try:
             self.train_pro.kill()
             self.train_pro.close()

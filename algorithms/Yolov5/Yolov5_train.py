@@ -1,5 +1,5 @@
 import argparse
-
+import os
 import torch.distributed as dist
 import torch.nn.functional as F
 import torch.optim as optim
@@ -335,6 +335,12 @@ def train0(dataset_cfg, model_cfg, weights, batch_size, epochs, outputQueue=None
     outputQueue: 获取该进程中的输出
     '''
     check_git_status()
+    wdir = 'weights' + os.sep  # weights dir
+    os.makedirs(wdir, exist_ok=True)
+    last = wdir + 'last.pt'
+    best = wdir + 'best.pt'
+
+
     parser = argparse.ArgumentParser()
     parser.add_argument('--epochs', type=int, default=epochs)
     parser.add_argument('--batch-size', type=int, default=batch_size)
@@ -369,11 +375,6 @@ def train0(dataset_cfg, model_cfg, weights, batch_size, epochs, outputQueue=None
     except:
         print('Apex recommended for faster mixed precision training: https://github.com/NVIDIA/apex')
         mixed_precision = False  # not installed
-
-    wdir = 'weights' + os.sep  # weights dir
-    os.makedirs(wdir, exist_ok=True)
-    last = wdir + 'last.pt'
-    best = wdir + 'best.pt'
 
     # Hyperparameters
     hyp = {'lr0': 0.01,  # initial learning rate (SGD=1E-2, Adam=1E-3)

@@ -34,6 +34,8 @@ def print_txt(tableWidget, targets, result):
     image_bboxs = []
     for image in result:
         txt_name = str(image.split('.')[:-1][0]) + '.txt'
+        if not os.path.exists(txt_name):
+            continue
         f = open(txt_name)
         bboxs = f.read().splitlines()[1:]
         image_bboxs.append(bboxs)

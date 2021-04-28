@@ -8,7 +8,7 @@ from utils.utils import *
 def nms_class(test):
     import torch
     thresh=0.85
-    print('before nms:', test[0].shape)
+    # print('before nms:', test[0].shape)
     test=test[0]
     if test==None:
        return [test]

@@ -21,6 +21,9 @@ class RemoveFog():
         # txt_path = './data/test/SOTS/outdoor/val_list.txt'
         path = paths[0]
         new_path = paths[1]
+        if os.path.exists(new_path):
+            shutil.rmtree(new_path)  # delete crop folder
+        os.makedirs(new_path)  # make new crop folder
         txt_path = paths[2]
         self.val_data_dir = paths[3]
         self.root_path = paths[4]

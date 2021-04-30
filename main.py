@@ -7,7 +7,9 @@ import cv2
 import yaml
 import shutil
 import time
-from multiprocessing import Process, Queue
+from multiprocessing import Queue
+from torch.multiprocessing import Process, set_start_method
+# from multiprocessing import Process, Queue
 # from tqdm import tqdm
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
@@ -512,6 +514,12 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         batchsize = self.train_win.batchsize
         epochs = self.train_win.epochs
         print("", dataset, weights, batchsize, epochs)
+        try:
+            # 多进程中使用cuda训练，需要设置，不然会报错
+            set_start_method('spawn')
+        except RuntimeError:
+            pass
+
         try:
             del self.train_pro
         except Exception as e:

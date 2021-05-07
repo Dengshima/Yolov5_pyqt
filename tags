@@ -215,9 +215,11 @@ default	main.py	/^    def default(self):$/;"	m	class:MyWindow
 dehaze	algorithms/RmFog/train.py	/^        dehaze = net(haze)$/;"	v
 delete_c	setup.py	/^def delete_c(path='.', excepts=(setup_file,)):$/;"	f
 dependencies	algorithms/Yolov5/hubconf.py	/^dependencies = ['torch', 'yaml']$/;"	v
-detect	algorithms/Yolov5/Yolov5_detect.py	/^def detect(source_image, model_weight, save_img=False):$/;"	f
+detect	algorithms/Yolov5/Yolov5_detect.py	/^def detect(source_image, model_weight, output='inference\/output', save_img=False):$/;"	f
 detect	algorithms/Yolov5/detect.py	/^def detect(save_img=False):$/;"	f
 detect_result	main.py	/^    def detect_result(self, result):$/;"	m	class:MyWindow
+detectdir	main.py	/^    def detectdir(self):$/;"	m	class:MyWindow
+detectdir_result	main.py	/^    def detectdir_result(self):$/;"	m	class:MyWindow
 detection	main.py	/^    def detection(self):$/;"	m	class:MyWindow
 device	algorithms/RmFog/test.py	/^device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")$/;"	v
 device	algorithms/RmFog/train.py	/^device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")$/;"	v

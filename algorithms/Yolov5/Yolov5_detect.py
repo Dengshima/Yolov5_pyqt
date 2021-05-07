@@ -62,12 +62,12 @@ def nms_class(test):
     print('after nms:', pred.shape)
     return test_new
 
-def detect(source_image, model_weight, save_img=False):
+def detect(source_image, model_weight, output='inference/output', save_img=False):
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights', type=str, default=model_weight, help='model.pt path')
     parser.add_argument('--source', type=str, default=source_image, help='source')
     # parser.add_argument('--source', type=str, default='test_img/0001.JPEG', help='source')  # file/folder, 0 for webcam
-    parser.add_argument('--output', type=str, default='inference/output', help='output folder')  # output folder
+    parser.add_argument('--output', type=str, default=output, help='output folder')  # output folder
     parser.add_argument('--img-size', type=int, default=640, help='inference size (pixels)')
     parser.add_argument('--conf-thres', type=float, default=0.2, help='object confidence threshold')
     parser.add_argument('--iou-thres', type=float, default=0.8, help='IOU threshold for NMS')

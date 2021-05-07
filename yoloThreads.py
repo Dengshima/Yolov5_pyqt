@@ -81,7 +81,9 @@ class DetectThread(QThread):
     def run(self):
         source = self.data[0]
         weights = self.data[1]
-        result = Yolov5_detect.detect(source, weights)
+        if len(self.data) == 3:
+            outputdir = self.data[2]
+        result = Yolov5_detect.detect(source, weights, output=outputdir)
         self.finished.emit(result)
 
 

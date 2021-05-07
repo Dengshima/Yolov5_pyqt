@@ -40,7 +40,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
                         '亮度增强': 'enlighten', '图像去雾': 'ridfog', '小图合并': 'concat',
                         '选择模型': 'choosemodel', '参数设置': 'selectdata', '开始训练': 'train',
                         '终止训练': 'stoptrain', '执行检测': 'detection', '模型剪枝': 'lightweight',
-                        '重置默认': 'default'}
+                        '重置默认': 'default', '批量检测': 'detectdir'}
         self.action.triggered.connect(self.exitprogram)  # 退出程序
 
         # 当需要传入参数时，要使用lambda表达式函数
@@ -278,6 +278,30 @@ class MyWindow(QMainWindow, Ui_MainWindow):
 
             self.images = [image]
             showImages(self.widget_4, self.gridLayout_2, self.colums, self.rows, self.images)
+
+    def detectdir(self):
+        '''
+        检测一个文件夹
+        '''
+        print('dir')
+        select = QFileDialog.getExistingDirectory(self, "选择文件夹", "")
+        # print(os.getcwd())
+        directory = select.replace(os.getcwd()+'/', '', 1)
+        outputdir = self.config['batchoutput']
+        self.detectdir_th = DetectThread([directory, self.model_weight, outputdir])
+
+        self.detectdir_th.finished.connect(self.detectdir_result)
+        self.qmain.put(self.detectdir_th)
+        self.time_queue.put('批量检测耗时: ')
+        self.time_queue.put(time.time())
+
+    def detectdir_result(self):
+        '''
+        批量检测
+        '''
+        self.time_queue.put(time.time())
+        self.textBrowser.append('批量检测结果存放在: ' + self.config['batchoutput'])
+        self.current_task = None
 
     def cropimage(self):
         '''

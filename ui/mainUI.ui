@@ -89,6 +89,11 @@ QTreeWidget {border:None}
               <string>关闭文件</string>
              </property>
             </item>
+            <item>
+             <property name="text">
+              <string>批量检测</string>
+             </property>
+            </item>
            </item>
            <item>
             <property name="text">
@@ -101,7 +106,7 @@ QTreeWidget {border:None}
             </item>
             <item>
              <property name="text">
-              <string>亮度增强</string>
+              <string>亮度增强（EnlightenGAN）</string>
              </property>
             </item>
             <item>

@@ -24,6 +24,7 @@ train:
 source: 'img_tmp/source'
 temp: 'img_tmp/images'
 result: 'img_tmp/result'
+batchoutput: 'img_tmp/batchoutput'
 
 # 亮度增强算法结果路径
 lowlight: 'img_tmp/lowlight'

@@ -285,6 +285,9 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         '''
         print('dir')
         select = QFileDialog.getExistingDirectory(self, "选择文件夹", "")
+        # 未选择路径或者路径无效
+        if len(select) == 0 or os.path.exists(select) is False:
+            return
         # print(os.getcwd())
         directory = select.replace(os.getcwd()+'/', '', 1)
         outputdir = self.config['batchoutput']

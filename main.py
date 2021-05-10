@@ -12,8 +12,8 @@ from torch.multiprocessing import Process, set_start_method
 # from multiprocessing import Process, Queue
 # from tqdm import tqdm
 from PyQt5 import QtGui
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
-from PyQt5.QtCore import QThread
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QWidget
+from PyQt5.QtCore import QThread, QEvent
 from ui.mainUI import Ui_MainWindow
 from ui.trainParasMain import TrainWindow
 import qdarkstyle
@@ -199,8 +199,16 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         init_dir(self.config['result'])
 
         # 滚动条
-        self.scrollArea.verticalScrollBar().setMaximum(1)
-        self.scrollArea.horizontalScrollBar().setMaximum(1)
+        # self.scrollArea.verticalScrollBar().setMaximum(1)
+        # self.scrollArea.horizontalScrollBar().setMaximum(1)
+        self.last_time_ymove = 0
+        self.last_time_xmove = 0
+        self.scrollArea.installEventFilter(self)
+        self.spinBox.setValue(self.colums)
+        self.spinBox_2.setValue(self.rows)
+        # 数值框改变，触发函数
+        self.spinBox.valueChanged.connect(self.changevalue)
+        self.spinBox_2.valueChanged.connect(self.changevalue)
 
         # 关闭文件不执行，重置会执行
         if start:
@@ -247,6 +255,10 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         width = self.widget_10.width() * rate
         height = self.widget_10.height() * rate
         self.widget_10.resize(int(width), int(height))
+
+    def changevalue(self):
+        self.colums = self.spinBox.value()
+        self.rows = self.spinBox_2.value()
 
     def onclick(self, option):
         '''
@@ -582,6 +594,28 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         模型剪枝函数，，，害，假的
         '''
         self.model_weight = 'weights/Fast.pt'
+
+    def eventFilter(self, obj, event):
+        if event.type() == QEvent.MouseMove:
+            if self.last_time_ymove == 0:
+                self.last_time_ymove = event.pos().y()
+            if self.last_time_xmove == 0:
+                self.last_time_xmove = event.pos().x()
+            distance_y = self.last_time_ymove - event.pos().y()
+            distance_x = self.last_time_xmove - event.pos().x()
+            self.scrollArea.verticalScrollBar().setValue(
+                self.scrollArea.verticalScrollBar().value() + distance_y
+            )
+            self.scrollArea.horizontalScrollBar().setValue(
+                self.scrollArea.horizontalScrollBar().value() + distance_x
+            )
+            self.last_time_ymove = event.pos().y()
+            self.last_time_xmove = event.pos().x()
+        elif event.type() == QEvent.MouseButtonRelease:
+            self.last_time_ymove = 0
+            self.last_time_xmove = 0
+        # return QWidget.eventFilter(self, source, event)
+        return super(MyWindow, self).eventFilter(obj, event)
 
     def closeEvent(self, event):
         sys.exit(app.exec_())

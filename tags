@@ -171,6 +171,7 @@ category	algorithms/RmFog/test.py	/^category = args.category$/;"	v
 category	algorithms/RmFog/train.py	/^category = args.category$/;"	v
 changemodel	main.py	/^    def changemodel(self, model_weight):$/;"	m	class:MyWindow
 changetrain	main.py	/^    def changetrain(self):$/;"	m	class:MyWindow
+changevalue	main.py	/^    def changevalue(self):$/;"	m	class:MyWindow
 changevalue	ui/trainParasMain.py	/^    def changevalue(self):$/;"	m	class:TrainWindow
 check_anchor_order	algorithms/Yolov5/utils/utils.py	/^def check_anchor_order(m):$/;"	f
 check_anchors	algorithms/Yolov5/utils/utils.py	/^def check_anchors(dataset, model, thr=4.0, imgsz=640):$/;"	f
@@ -234,6 +235,7 @@ enhance_net_nopool	algorithms/ZeroDCE/dce_model.py	/^class enhance_net_nopool(nn
 enlighten	main.py	/^    def enlighten(self):$/;"	m	class:MyWindow
 enlighten_finished	main.py	/^    def enlighten_finished(self):$/;"	m	class:MyWindow
 epochs	algorithms/Yolov5/Yolov5_train.py	/^    epochs = 100$/;"	v
+eventFilter	main.py	/^    def eventFilter(self, obj, event):$/;"	m	class:MyWindow
 exif_size	algorithms/Yolov5/utils/datasets.py	/^def exif_size(img):$/;"	f
 exitprogram	main.py	/^    def exitprogram(self):$/;"	m	class:MyWindow
 f	algorithms/Yolov5/models/onnx_export.py	/^    f = opt.weights.replace('.pt', '.onnx')  # onnx filename$/;"	v

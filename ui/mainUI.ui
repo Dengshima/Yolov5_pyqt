@@ -196,7 +196,7 @@ QTreeWidget {border:None}
              </property>
              <layout class="QGridLayout" name="gridLayout_6">
               <item row="0" column="0">
-               <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,1,1,1,1,0,18">
+               <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,1,1,1,1,1,1,0,18">
                 <item>
                  <widget class="QComboBox" name="comboBox">
                   <item>
@@ -249,6 +249,38 @@ QTreeWidget {border:None}
                    </item>
                    <item row="0" column="1">
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_11" native="true">
+                  <layout class="QGridLayout" name="gridLayout_13">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="label_3">
+                     <property name="text">
+                      <string>行数</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QSpinBox" name="spinBox"/>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_12" native="true">
+                  <layout class="QGridLayout" name="gridLayout_14">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="label_4">
+                     <property name="text">
+                      <string>列数</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QSpinBox" name="spinBox_2"/>
                    </item>
                   </layout>
                  </widget>
@@ -327,7 +359,7 @@ QTreeWidget {border:None}
                      <x>0</x>
                      <y>0</y>
                      <width>967</width>
-                     <height>650</height>
+                     <height>649</height>
                     </rect>
                    </property>
                    <property name="sizePolicy">
@@ -398,14 +430,14 @@ QTreeWidget {border:None}
                    <item row="0" column="0">
                     <widget class="QPushButton" name="pushButton_6">
                      <property name="text">
-                      <string>Zoom in</string>
+                      <string>放大</string>
                      </property>
                     </widget>
                    </item>
                    <item row="0" column="1">
                     <widget class="QPushButton" name="pushButton_7">
                      <property name="text">
-                      <string>Zoom out</string>
+                      <string>缩小</string>
                      </property>
                     </widget>
                    </item>

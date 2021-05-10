@@ -12,7 +12,7 @@ from torch.multiprocessing import Process, set_start_method
 # from multiprocessing import Process, Queue
 # from tqdm import tqdm
 from PyQt5 import QtGui
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
 from PyQt5.QtCore import QThread, QEvent
 from ui.mainUI import Ui_MainWindow
 from ui.trainParasMain import TrainWindow

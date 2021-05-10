@@ -123,7 +123,8 @@ def cropimage_overlap(origin, colums, rows, save_path, h=0, v=0):
     h: float, 水平切割重叠率
     v: float, 垂直切割重叠率
     返回：
-    images: list[str, ...], 结果文件的路径列表
+    result: list[image_result, new_imageName], 列表形式
+    第一个参数为切割后的实际图片路径列表，第二个为显示的图片路径（图上画切割线的形式）
     '''
     save_name = plotline(origin, colums, rows, h=h, v=v)
     filetype = origin.split('.')[-1]

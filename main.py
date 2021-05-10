@@ -46,10 +46,13 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         # 当需要传入参数时，要使用lambda表达式函数
         self.pushButton.clicked.connect(lambda: self.onclick('大图切割'))
         self.pushButton_2.clicked.connect(lambda: self.onclick('执行检测'))
+        # 清空输出
         self.pushButton_3.clicked.connect(lambda: self.textBrowser.clear())
+        # 训练窗口
         self.pushButton_4.clicked.connect(self.changetrain)
         self.pushButton_5.clicked.connect(self.showtrain)
 
+        # 缩放按钮
         self.pushButton_6.clicked.connect(lambda: self.scrollResize(1.2))
         self.pushButton_7.clicked.connect(lambda: self.scrollResize(0.8))
 
@@ -64,7 +67,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
             lambda: self.changemodel(self.models_dict[self.comboBox.currentText()])
         )
 
-        # 图片切割规模
+        # 图片切割行列数
         self.rows = 2   # rows
         self.colums = 2   # columns
 
@@ -104,6 +107,12 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         并且获取训练程序中的输出，展示进度条等
         '''
         # 将训练进程中的输出，显示到GUI控件中
+        '''
+        训练返回的消息，有多种类型
+        1. 当返回为dict字典类型时，说明，返回的是训练的batchs，epoch参数
+        2. 返回一个列表，并且长度为2， 说明返回的是每次迭代的情况，在训练中
+        3. 除此之外，为一般消息，直接显示就好
+        '''
         if not self.train_output_q.empty():
             s = self.train_output_q.get()
             # 开始训练之后，返回训练进度条信息，和当前epoch
@@ -129,11 +138,14 @@ class MyWindow(QMainWindow, Ui_MainWindow):
                 self.train_win.textBrowser.textCursor().removeSelectedText()
                 self.train_win.textBrowser.textCursor().deletePreviousChar()
                 self.train_win.textBrowser.setTextCursor(storeCursorPos)
+
                 # 添加新一行，达到刷新显示数据的目的
                 s = s[0]
                 self.train_win.textBrowser.append(s)
             else:
                 self.train_win.textBrowser.append(s)
+        # 主线程消息队列
+        # 会在程序运行中，依次存储：操作类型，开始时间，结束时间，当得到结束时间时，会触发该判断
         # 当消息队列中存在3个时，表示一个线程已经执行完成，需要显示线程执行的时间
         if self.time_queue.qsize() == 3:
             print('完成')
@@ -141,6 +153,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
             start = self.time_queue.get()
             end = self.time_queue.get()
             self.textBrowser.append(string + ('%.4f') % (end-start) + 's')
+        # 处理任务队列
         # 任务队列为空
         if self.qmain.empty():
             return
@@ -163,6 +176,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         '''
         selected_filter = "Models (*.pt);;All Files(*)"
         FileName, FileType = QFileDialog.getOpenFileName(self, "打开图片", "", selected_filter)
+        # 需要加判断，防止选择时，未正确选择而取消了，导致变量为空
         if FileName != '':
             self.model_weight = FileName.replace(os.getcwd()+'/', '', 1)
             # print(self.model_weight)
@@ -198,12 +212,12 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         init_dir(self.config['temp'])
         init_dir(self.config['result'])
 
-        # 滚动条
-        # self.scrollArea.verticalScrollBar().setMaximum(1)
-        # self.scrollArea.horizontalScrollBar().setMaximum(1)
+        # 为scrollArea添加事件响应函数
         self.last_time_ymove = 0
         self.last_time_xmove = 0
         self.scrollArea.installEventFilter(self)
+
+        # 设置分割时的行列数
         self.spinBox.setValue(self.colums)
         self.spinBox_2.setValue(self.rows)
         # 数值框改变，触发函数
@@ -252,11 +266,17 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.textBrowser.ensureCursorVisible()
 
     def scrollResize(self, rate):
+        '''
+        图片预览窗口缩放
+        '''
         width = self.widget_10.width() * rate
         height = self.widget_10.height() * rate
         self.widget_10.resize(int(width), int(height))
 
     def changevalue(self):
+        '''
+        设置行列的控件，实时监听修改事件
+        '''
         self.colums = self.spinBox.value()
         self.rows = self.spinBox_2.value()
 
@@ -287,7 +307,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
             return
         else:
             '''
-            将sourceimage和images都设置为打开的图片,
+            将sourceimage和images都设置为刚才打开的图片,
             调用showImages函数显示
             '''
             self.reset(start=False)
@@ -305,15 +325,16 @@ class MyWindow(QMainWindow, Ui_MainWindow):
 
     def detectdir(self):
         '''
-        检测一个文件夹
+        批量检测，检测一个文件夹
         '''
         select = QFileDialog.getExistingDirectory(self, "选择文件夹", "")
         # 未选择路径或者路径无效
         if len(select) == 0 or os.path.exists(select) is False:
             return
-        # print(os.getcwd())
         directory = select.replace(os.getcwd()+'/', '', 1)
+        # 批量检测输出结果与普通检测不同，分开放
         outputdir = self.config['batchoutput']
+        # 使用多线程
         self.detectdir_th = DetectThread([directory, self.model_weight, outputdir])
 
         self.detectdir_th.finished.connect(self.detectdir_result)
@@ -323,7 +344,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
 
     def detectdir_result(self):
         '''
-        批量检测
+        批量检测完毕，告知结果
         '''
         self.time_queue.put(time.time())
         self.textBrowser.append('批量检测结果存放在: ' + self.config['batchoutput'])
@@ -348,6 +369,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         result = cropimage_overlap(self.images[0], self.colums,
                                    self.rows, self.config['temp'],
                                    h=overlap_h, v=overlap_v)
+        # 第一个返回为切割后的小图路径列表，第二个为原大图画线的结果
         self.images = result[0]
         show_name = result[1]
         # 显示图片
@@ -418,7 +440,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
                 print("Unable to copy file. %s" % e)
             except Exception:
                 print("Unexpected error:", sys.exc_info())
-
+        # 多线程
         self.ridfog_th = FogThread(paths)
         self.ridfog_th.finished.connect(self.ridfog_result)
         self.qmain.put(self.ridfog_th)

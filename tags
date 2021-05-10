@@ -465,6 +465,7 @@ s	setup.py	/^s = "# cython: language_level=3"$/;"	v
 save_image	algorithms/RmFog/utils.py	/^def save_image(dehaze, image_name, category):$/;"	f
 scale_coords	algorithms/Yolov5/utils/utils.py	/^def scale_coords(img1_shape, coords, img0_shape, ratio_pad=None):$/;"	f
 scale_img	algorithms/Yolov5/utils/torch_utils.py	/^def scale_img(img, ratio=1.0, same_shape=False):  # img(16,3,256,416), r=ratio$/;"	f
+scrollResize	main.py	/^    def scrollResize(self, rate):$/;"	m	class:MyWindow
 select_data	ui/trainParasMain.py	/^    def select_data(self):$/;"	m	class:TrainWindow
 select_device	algorithms/Yolov5/utils/torch_utils.py	/^def select_device(device='', apex=False, batch_size=None):$/;"	f
 selectdata	main.py	/^    def selectdata(self):$/;"	m	class:MyWindow
@@ -472,7 +473,7 @@ settings	ui/trainParasMain.py	/^    def settings(self):$/;"	m	class:TrainWindow
 setupUi	ui/mainUI.py	/^    def setupUi(self, MainWindow):$/;"	m	class:Ui_MainWindow
 setupUi	ui/trainParasUI.py	/^    def setupUi(self, Dialog):$/;"	m	class:Ui_Dialog
 setup_file	setup.py	/^setup_file = __file__.replace('\/', '\\\\')$/;"	v
-showImages	funlibs.py	/^def showImages(widget, gridLayout, colums, rows, imgnamelist):$/;"	f
+showImages	funlibs.py	/^def showImages(gridLayout, colums, rows, imgnamelist):$/;"	f
 showtrain	main.py	/^    def showtrain(self):$/;"	m	class:MyWindow
 signalForText	yoloThreads.py	/^    signalForText = pyqtSignal(str)$/;"	v	class:OutputThread
 smooth_BCE	algorithms/Yolov5/utils/utils.py	/^def smooth_BCE(eps=0.1):  # https:\/\/github.com\/ultralytics\/yolov3\/issues\/238#issuecomment-/;"	f

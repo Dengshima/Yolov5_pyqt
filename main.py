@@ -50,6 +50,9 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.pushButton_4.clicked.connect(self.changetrain)
         self.pushButton_5.clicked.connect(self.showtrain)
 
+        self.pushButton_6.clicked.connect(lambda: self.scrollResize(1.2))
+        self.pushButton_7.clicked.connect(lambda: self.scrollResize(0.8))
+
         # 模型选择菜单*********************************************
         self.models_dict = {'深度学习目标检测识别模型(RGB)': 'weights/RGBbest.pt',
                             '基于样本迁移的目标检测识别模型(RGB)': 'weights/RGBbest.pt',
@@ -195,6 +198,10 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         init_dir(self.config['temp'])
         init_dir(self.config['result'])
 
+        # 滚动条
+        self.scrollArea.verticalScrollBar().setMaximum(1)
+        self.scrollArea.horizontalScrollBar().setMaximum(1)
+
         # 关闭文件不执行，重置会执行
         if start:
             # 切割重叠率重置
@@ -206,7 +213,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
             self.model_weight = self.models_dict['深度学习目标检测识别模型(RGB)']
         else:
             # 对应关闭文件选项
-            showImages(self.widget_4, self.gridLayout_2, self.colums, self.rows, [])
+            showImages(self.gridLayout_2, self.colums, self.rows, [])
 
     def default(self):
         '''
@@ -235,6 +242,11 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         cursor.insertText(text)
         self.textBrowser.setTextCursor(cursor)
         self.textBrowser.ensureCursorVisible()
+
+    def scrollResize(self, rate):
+        width = self.widget_10.width() * rate
+        height = self.widget_10.height() * rate
+        self.widget_10.resize(int(width), int(height))
 
     def onclick(self, option):
         '''
@@ -277,7 +289,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
             image = shutil.copy(self.sourceimage, self.config['temp'])
 
             self.images = [image]
-            showImages(self.widget_4, self.gridLayout_2, self.colums, self.rows, self.images)
+            showImages(self.gridLayout_2, self.colums, self.rows, self.images)
 
     def detectdir(self):
         '''
@@ -324,7 +336,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
                                         self.rows, self.config['temp'],
                                         h=overlap_h, v=overlap_v)
         # 显示图片
-        showImages(self.widget_4, self.gridLayout_2, self.colums, self.rows, self.images)
+        showImages(self.gridLayout_2, self.colums, self.rows, self.images)
         self.tableWidget.setRowCount(0)
 
     def enlighten(self):
@@ -364,7 +376,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         image_names.sort()
         self.images = image_names
         print('enlighten result:', self.images)
-        showImages(self.widget_4, self.gridLayout_2, self.colums, self.rows, self.images)
+        showImages(self.gridLayout_2, self.colums, self.rows, self.images)
         self.tableWidget.setRowCount(0)
         self.current_task = None
         self.time_queue.put(time.time())
@@ -412,7 +424,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
             results.append(shutil.copy(image, self.config['temp']))
         self.images = results
         print('remove fog result:', self.images)
-        showImages(self.widget_4, self.gridLayout_2, self.colums, self.rows, self.images)
+        showImages(self.gridLayout_2, self.colums, self.rows, self.images)
         self.tableWidget.setRowCount(0)
         self.time_queue.put(time.time())
         self.current_task = None
@@ -462,7 +474,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         else:
             self.result = [image_names[0]]
 
-        showImages(self.widget_4, self.gridLayout_2, self.colums, self.rows, [image_names[0]])
+        showImages(self.gridLayout_2, self.colums, self.rows, [image_names[0]])
 
     def detection(self):
         '''
@@ -491,7 +503,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         for image in self.result:
             result0.append(shutil.copy(image, self.config['result']))
         self.result = result0
-        showImages(self.widget_4, self.gridLayout_2, self.colums, self.rows, self.result)
+        showImages(self.gridLayout_2, self.colums, self.rows, self.result)
         print_txt(self.tableWidget, self.config['targets'], result)
         self.time_queue.put(time.time())
         self.current_task = None

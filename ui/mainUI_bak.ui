@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1600</width>
-    <height>1000</height>
+    <width>1440</width>
+    <height>900</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -52,9 +52,7 @@ QTreeWidget {border:None}
         <property name="font">
          <font>
           <family>Noto Sans</family>
-          <pointsize>14</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
+          <pointsize>16</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -315,35 +313,23 @@ QTreeWidget {border:None}
             <widget class="QWidget" name="widget_6" native="true">
              <layout class="QGridLayout" name="gridLayout_9">
               <item row="0" column="0">
-               <layout class="QGridLayout" name="gridLayout_8" rowstretch="15,1,4">
+               <layout class="QGridLayout" name="gridLayout_8" rowstretch="5,2">
                 <item row="0" column="0">
-                 <widget class="QScrollArea" name="scrollArea">
-                  <property name="sizeAdjustPolicy">
-                   <enum>QAbstractScrollArea::AdjustToContents</enum>
+                 <widget class="QWidget" name="widget_4" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
                   </property>
-                  <widget class="QWidget" name="widget_10">
-                   <property name="geometry">
-                    <rect>
-                     <x>0</x>
-                     <y>0</y>
-                     <width>967</width>
-                     <height>650</height>
-                    </rect>
-                   </property>
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true"/>
-                   </property>
-                   <layout class="QGridLayout" name="gridLayout_2"/>
-                  </widget>
+                  <layout class="QGridLayout" name="gridLayout_3">
+                   <item row="0" column="0">
+                    <layout class="QGridLayout" name="gridLayout_2"/>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
-                <item row="2" column="0">
+                <item row="1" column="0">
                  <widget class="QWidget" name="widget_3" native="true">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -351,7 +337,7 @@ QTreeWidget {border:None}
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
-                  <layout class="QGridLayout" name="gridLayout_5" columnstretch="1,15">
+                  <layout class="QGridLayout" name="gridLayout_5" columnstretch="1,10">
                    <item row="0" column="0">
                     <widget class="QWidget" name="widget_9" native="true">
                      <layout class="QGridLayout" name="gridLayout_12">
@@ -392,26 +378,6 @@ QTreeWidget {border:None}
                   </layout>
                  </widget>
                 </item>
-                <item row="1" column="0">
-                 <widget class="QWidget" name="widget_4" native="true">
-                  <layout class="QGridLayout" name="gridLayout_3">
-                   <item row="0" column="0">
-                    <widget class="QPushButton" name="pushButton_6">
-                     <property name="text">
-                      <string>Zoom in</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="0" column="1">
-                    <widget class="QPushButton" name="pushButton_7">
-                     <property name="text">
-                      <string>Zoom out</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </widget>
-                </item>
                </layout>
               </item>
              </layout>
@@ -431,7 +397,7 @@ QTreeWidget {border:None}
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1600</width>
+     <width>1440</width>
      <height>33</height>
     </rect>
    </property>

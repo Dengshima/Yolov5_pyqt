@@ -170,14 +170,12 @@ def concat_image(image_names, colums, rows, overlap_h=0, overlap_v=0):
     return img_result
 
 
-def showImages(widget, gridLayout, colums, rows, imgnamelist):
+def showImages(gridLayout, colums, rows, imgnamelist):
     '''
     显示图片函数
     给该函数传入需要显示的图像路径（以列表形式），即可在窗口右边模块显示
 
     输入：
-
-    widget: 展示图片的widget
     gridLayout: widget对应的gridLayout
     colums: 行数
     rows: 列数
@@ -190,9 +188,9 @@ def showImages(widget, gridLayout, colums, rows, imgnamelist):
 
     labels = []
 
-    if n != 0:
-        width = widget.width() / rows - 20
-        height = widget.height() / colums - 20
+    # if n != 0:
+    #    width = widget.width() / rows - 20
+    #    height = widget.height() / colums - 20
     for imgName in imgnamelist:
 
         image = cv2.imread(imgName)
@@ -201,7 +199,7 @@ def showImages(widget, gridLayout, colums, rows, imgnamelist):
         # 参数依次为：图像、宽、高、每一行的字节数、图像格式彩色图像一般为Format_RGB888
         image2 = QImage(image, image.shape[1], image.shape[0], blue.shape[1]*3,
                         QImage.Format_RGB888)
-        image = QPixmap(image2).scaled(width, height)  # QImage类型图像放入QPixmap
+        image = QPixmap(image2)  # .scaled(width, height)  # QImage类型图像放入QPixmap
 
         # image = QtGui.QPixmap(imgName).scaled(width, height)
         # 根据图片动态生成label

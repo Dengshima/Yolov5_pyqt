@@ -435,6 +435,7 @@ plot_study_txt	algorithms/Yolov5/utils/utils.py	/^def plot_study_txt(f='study.tx
 plot_targets_txt	algorithms/Yolov5/utils/utils.py	/^def plot_targets_txt():  # from utils.utils import *; plot_targets_txt()$/;"	f
 plot_test_txt	algorithms/Yolov5/utils/utils.py	/^def plot_test_txt():  # from utils.utils import *; plot_test()$/;"	f
 plot_wh_methods	algorithms/Yolov5/utils/utils.py	/^def plot_wh_methods():  # from utils.utils import *; plot_wh_methods()$/;"	f
+plotline	funlibs.py	/^def plotline(origin, colums, rows, h=0, v=0):$/;"	f
 plt	algorithms/RmFog/train.py	/^import matplotlib.pyplot as plt$/;"	I	nameref:module:matplotlib.pyplot
 plt	algorithms/Yolov5/utils/utils.py	/^import matplotlib.pyplot as plt$/;"	I	nameref:module:matplotlib.pyplot
 populate_train_list	algorithms/ZeroDCE/dataloader.py	/^def populate_train_list(lowlight_images_path):$/;"	f

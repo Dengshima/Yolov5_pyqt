@@ -29,8 +29,8 @@ batchoutput: 'img_tmp/batchoutput'
 # 亮度增强算法结果路径
 lowlight: 'img_tmp/lowlight'
 
-# 已弃用
-crop_dir: 'croped'
+# 切图时，画线图
+croped: 'img_tmp/croped'
 
 # yolov5算法检测结果路径
 output_dir: 'inference/output'

@@ -295,7 +295,6 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         '''
         检测一个文件夹
         '''
-        print('dir')
         select = QFileDialog.getExistingDirectory(self, "选择文件夹", "")
         # 未选择路径或者路径无效
         if len(select) == 0 or os.path.exists(select) is False:
@@ -325,18 +324,23 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         无返回值，切割结果赋值给self.images（列表形式），并显示
         '''
         # 如果当前图片不是一张，则为误操作
-        if len(self.images) != 1:
+        if len(self.images) != 1 and len(self.result) > 0:
             QMessageBox.warning(self, "标题", "当前无需进行切图操作")
             return
+        else:
+            self.images = [self.sourceimage]
         # 获取设置的重叠率
         overlap_h = self.doubleSpinBox.value()
         overlap_v = self.doubleSpinBox_2.value()
         # 调用切割图片的函数
-        self.images = cropimage_overlap(self.images[0], self.colums,
-                                        self.rows, self.config['temp'],
-                                        h=overlap_h, v=overlap_v)
+        result = cropimage_overlap(self.images[0], self.colums,
+                                   self.rows, self.config['temp'],
+                                   h=overlap_h, v=overlap_v)
+        self.images = result[0]
+        show_name = result[1]
         # 显示图片
-        showImages(self.gridLayout_2, self.colums, self.rows, self.images)
+        # showImages(self.gridLayout_2, self.colums, self.rows, self.images)
+        showImages(self.gridLayout_2, self.colums, self.rows, [show_name])
         self.tableWidget.setRowCount(0)
 
     def enlighten(self):

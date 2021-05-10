@@ -2,6 +2,7 @@
 # Date: 2021-04-06
 import os
 import shutil
+import yaml
 
 import cv2
 import numpy as np
@@ -68,6 +69,49 @@ def addTableRow(table, row_data):
         col += 1
 
 
+def plotline(origin, colums, rows, h=0, v=0):
+    save_name = os.path.basename(origin)
+    with open('config.yaml', 'r') as f:
+        config = yaml.load(f, Loader=yaml.FullLoader)
+    init_dir(config['croped'])
+    save_name = config['croped'] + '/' + save_name
+
+    red = (0, 0, 255)
+    # origin = Image.open(origin)
+    origin = cv2.imread(origin)
+    # width, height = origin.size
+    height = origin.shape[0]
+    width = origin.shape[1]
+    # 每张图片的宽度
+    stride_r = width / rows
+    # 图片高度
+    stride_c = height / colums
+    # 存放切割结果的图片路径
+    for j in range(colums):
+        for i in range(rows):
+            box = [i*stride_r, j*stride_c, (i+1)*stride_r, (j+1)*stride_c]
+            # 向右下角加重叠部分
+            if j != colums-1 and i != rows-1:
+                box[2] += h*stride_r
+                box[3] += v*stride_c
+            # 右下角的一块，往左上加重叠部分
+            elif j == colums-1 and i == rows-1:
+                box[0] -= h*stride_r
+                box[1] -= v*stride_c
+            # 行或者列的边际，往图像内部加重叠
+            elif j == colums-1:
+                box[1] -= v*stride_c
+                box[2] += h*stride_r
+            else:
+                box[0] -= h*stride_r
+                box[3] += v*stride_c
+            box = tuple(box)
+            cv2.rectangle(origin, (int(box[0]), int(box[1])),
+                          (int(box[2]), int(box[3])), red, 3)
+    cv2.imwrite(save_name, origin)
+    return save_name
+
+
 def cropimage_overlap(origin, colums, rows, save_path, h=0, v=0):
     '''
     带重叠率切割图片的函数，
@@ -81,6 +125,7 @@ def cropimage_overlap(origin, colums, rows, save_path, h=0, v=0):
     返回：
     images: list[str, ...], 结果文件的路径列表
     '''
+    save_name = plotline(origin, colums, rows, h=h, v=v)
     filetype = origin.split('.')[-1]
     origin = Image.open(origin)
     width, height = origin.size
@@ -114,7 +159,8 @@ def cropimage_overlap(origin, colums, rows, save_path, h=0, v=0):
             images.append(imgname)
             # 切图并保存文件
             origin.crop(box).save(imgname)
-    return images
+    # return images
+    return [images, save_name]
 
 
 def concat_image(image_names, colums, rows, overlap_h=0, overlap_v=0):

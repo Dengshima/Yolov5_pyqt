@@ -37,7 +37,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.treeWidget.itemClicked.connect(lambda:
                                             self.onclick(self.treeWidget.currentItem().text(0)))
         self.options = {'打开文件': 'openfile', '关闭文件': 'reset', '大图切割': 'cropimage',
-                        '亮度增强': 'enlighten', '图像去雾': 'ridfog', '小图合并': 'concat',
+                        '亮度增强（EnlightenGAN）': 'enlighten', '图像去雾': 'ridfog', '小图合并': 'concat',
                         '选择模型': 'choosemodel', '参数设置': 'selectdata', '开始训练': 'train',
                         '终止训练': 'stoptrain', '执行检测': 'detection', '模型剪枝': 'lightweight',
                         '重置默认': 'default', '批量检测': 'detectdir'}

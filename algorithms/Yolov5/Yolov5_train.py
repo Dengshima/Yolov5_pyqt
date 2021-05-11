@@ -1,5 +1,8 @@
 import argparse
 import os
+import glob
+import torch
+import yaml
 import torch.distributed as dist
 import torch.nn.functional as F
 import torch.optim as optim
@@ -9,7 +12,7 @@ from torch.utils.tensorboard import SummaryWriter
 
 import test  # import test.py to get mAP after each epoch
 from models.yolo import Model
-from utils import google_utils
+from utils import google_utils, torch_utils
 from utils.datasets import *
 from utils.utils import *
 
@@ -17,6 +20,13 @@ from utils.utils import *
 def train(hyp, opt, outputqueue):
     results_file = 'results.txt'
     mixed_precision = True
+    try:  # Mixed precision training https://github.com/NVIDIA/apex
+        from apex import amp
+    except Exception:
+        print('Apex recommended for faster mixed precision training: \
+        https://github.com/NVIDIA/apex')
+        mixed_precision = False  # not installed
+
     device = torch_utils.select_device(opt.device, apex=mixed_precision, batch_size=opt.batch_size)
     mixed_precision = False if device.type == 'cpu' else True
     tb_writer = None

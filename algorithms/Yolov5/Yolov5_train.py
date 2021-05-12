@@ -3,6 +3,7 @@ import os
 import glob
 import torch
 import yaml
+from torch.multiprocessing import Process, set_start_method
 import torch.distributed as dist
 import torch.nn.functional as F
 import torch.optim as optim
@@ -108,6 +109,13 @@ def train(hyp, opt, outputqueue):
 
         start_epoch = ckpt['epoch'] + 1
         del ckpt
+    
+    try:  # Mixed precision training https://github.com/NVIDIA/apex
+        from apex import amp
+    except Exception:
+        print('Apex recommended for faster mixed precision training: \
+        https://github.com/NVIDIA/apex')
+        mixed_precision = False  # not installed
 
     # Mixed precision training https://github.com/NVIDIA/apex
     if mixed_precision:
@@ -385,7 +393,6 @@ def train0(dataset_cfg, model_cfg, weights, batch_size, epochs, outputQueue=None
     except:
         print('Apex recommended for faster mixed precision training: https://github.com/NVIDIA/apex')
         mixed_precision = False  # not installed
-
     # Hyperparameters
     hyp = {'lr0': 0.01,  # initial learning rate (SGD=1E-2, Adam=1E-3)
         'momentum': 0.937,  # SGD momentum

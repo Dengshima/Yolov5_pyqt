@@ -8,7 +8,8 @@ import yaml
 import shutil
 import time
 from multiprocessing import Queue
-from torch.multiprocessing import Process, set_start_method
+import torch
+from torch.multiprocessing import Process
 # from multiprocessing import Process, Queue
 # from tqdm import tqdm
 from PyQt5 import QtGui
@@ -544,6 +545,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         showImages(self.gridLayout_2, self.colums, self.rows, self.result)
         print_txt(self.tableWidget, self.config['targets'], result)
         self.time_queue.put(time.time())
+        self.detect_th.deleteLater()
         self.current_task = None
 
     def selectdata(self):
@@ -592,12 +594,6 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         epochs = self.train_win.epochs
         print("", dataset, weights, batchsize, epochs)
         try:
-            # 多进程中使用cuda训练，需要设置，不然会报错
-            set_start_method('spawn')
-        except RuntimeError:
-            pass
-
-        try:
             del self.train_pro
         except Exception as e:
             print(e)
@@ -644,6 +640,8 @@ class MyWindow(QMainWindow, Ui_MainWindow):
 
 
 if __name__ == '__main__':
+    # 与多进程有关，须全局设置该参数，不然会报错
+    torch.multiprocessing.set_start_method('spawn')
     app = QApplication(sys.argv)
     myWin = MyWindow()
     # 使用qdarkstyle风格

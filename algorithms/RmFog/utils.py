@@ -15,6 +15,7 @@ from math import log10
 # from skimage import measure
 from skimage.metrics import structural_similarity
 import yaml
+import os
 
 
 def to_psnr(dehaze, gt):
@@ -83,8 +84,12 @@ def save_image(dehaze, image_name, category):
     result_dir = config['fog_dir'][3]
 
     for ind in range(batch_num):
+        # utils.save_image(dehaze_images[ind],  result_dir +
+        #                  '{}_results/{}'.format(category, image_name[ind][:-3] + 'png'))
         utils.save_image(dehaze_images[ind],  result_dir +
-                         '{}_results/{}'.format(category, image_name[ind][:-3] + 'png'))
+                         '{}_results/{}'.format(category, 
+                         os.path.splitext(image_name[ind])[0] + 
+                         os.path.splitext(image_name[ind])[1]))
 
 
 def print_log(epoch, num_epochs, one_epoch_time, train_psnr, val_psnr, val_ssim, category):

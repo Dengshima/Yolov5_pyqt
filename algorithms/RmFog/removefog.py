@@ -29,7 +29,8 @@ class RemoveFog():
         self.root_path = paths[4]
         with open(txt_path, 'w') as fp:
             for file in os.listdir(path):
-                file_new = file[:-4] + '_1' + file[-4:]
+                file_new = os.path.splitext(file)[0] + '_1' + os.path.splitext(file)[1]
+                print('file_new: ', file_new)
                 full_file = os.path.join(path, file)
                 new_full_file = os.path.join(new_path, file_new)
                 shutil.copy(full_file, new_full_file)

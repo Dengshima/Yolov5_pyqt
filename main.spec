@@ -6,7 +6,6 @@ block_cipher = None
 added_files = [
     ( 'config.yaml', '.' ),
     ( 'train.yaml', '.' ),
-    ( 'weights', 'weights' ),
     ( 'img_tmp', 'img_tmp' ),
     ( 'algorithms/RmFog/indoor_haze_best_3_6', 'algorithms/RmFog' ),
     ( 'algorithms/RmFog/outdoor_haze_best_3_6', 'algorithms/RmFog' ),

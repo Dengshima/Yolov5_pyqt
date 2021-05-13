@@ -1,9 +1,9 @@
 import argparse
 import json
 
-from utils import google_utils
-from utils.datasets import *
-from utils.utils import *
+from .utils import google_utils
+from .utils.datasets import *
+from .utils.utils import *
 
 
 def test(data,

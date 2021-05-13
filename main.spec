@@ -20,7 +20,7 @@ added_files = [
 ]
 
 a = Analysis(['main.py'],
-             pathex=['algorithms', 'ui', '/home/dsm/codes/qt5_Detection'],
+             pathex=['algorithms', 'ui', '../qt5_Detection'],
              binaries=[],
              datas=added_files,
              hiddenimports=[],

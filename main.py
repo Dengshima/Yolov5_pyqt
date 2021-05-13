@@ -615,6 +615,9 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.model_weight = 'weights/Fast.pt'
 
     def eventFilter(self, obj, event):
+        '''
+        设置鼠标可以拖动图片框
+        '''
         if event.type() == QEvent.MouseMove:
             if self.last_time_ymove == 0:
                 self.last_time_ymove = event.pos().y()

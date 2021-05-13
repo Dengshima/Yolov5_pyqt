@@ -3,7 +3,7 @@
 import os
 import shutil
 import yaml
-
+import random
 import cv2
 import numpy as np
 
@@ -76,7 +76,8 @@ def plotline(origin, colums, rows, h=0, v=0):
     init_dir(config['croped'])
     save_name = config['croped'] + '/' + save_name
 
-    red = (0, 0, 255)
+    colors = [[random.randint(0, 255) for _ in range(3)] for _ in range(colums * rows)]
+    # red = (0, 0, 255)
     # origin = Image.open(origin)
     origin = cv2.imread(origin)
     # width, height = origin.size
@@ -106,8 +107,9 @@ def plotline(origin, colums, rows, h=0, v=0):
                 box[0] -= h*stride_r
                 box[3] += v*stride_c
             box = tuple(box)
+            color = colors[j * colums + i]
             cv2.rectangle(origin, (int(box[0]), int(box[1])),
-                          (int(box[2]), int(box[3])), red, 3)
+                          (int(box[2]), int(box[3])), color, 3)
     cv2.imwrite(save_name, origin)
     return save_name
 

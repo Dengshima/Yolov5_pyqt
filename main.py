@@ -7,9 +7,10 @@ import cv2
 import yaml
 import shutil
 import time
-from multiprocessing import Queue
-import torch
-from torch.multiprocessing import Process
+from multiprocessing import Queue, Process
+import multiprocessing
+# import torch
+# from torch.multiprocessing import Process
 # from multiprocessing import Process, Queue
 # from tqdm import tqdm
 from PyQt5 import QtGui
@@ -640,8 +641,8 @@ class MyWindow(QMainWindow, Ui_MainWindow):
 
 
 if __name__ == '__main__':
-    # 与多进程有关，须全局设置该参数，不然会报错
-    torch.multiprocessing.set_start_method('spawn')
+    multiprocessing.set_start_method('spawn')
+    multiprocessing.freeze_support()
     app = QApplication(sys.argv)
     myWin = MyWindow()
     # 使用qdarkstyle风格

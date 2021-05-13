@@ -8,8 +8,8 @@ import torch
 import argparse
 import torch.nn as nn
 from torch.utils.data import DataLoader
-from val_data import ValData
-from model import GridDehazeNet
+from .val_data import ValData
+from .model import GridDehazeNet
 from .utils import validation
 
 

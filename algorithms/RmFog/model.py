@@ -11,7 +11,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
-from residual_dense_block import RDB
+from .residual_dense_block import RDB
 
 
 # --- Downsampling block in GridDehazeNet  --- #

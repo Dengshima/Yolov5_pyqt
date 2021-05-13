@@ -7,9 +7,9 @@ import os
 import sys
 import argparse
 import time
-import dataloader
+from . import dataloader
 import model
-import Myloss
+from . import Myloss
 import numpy as np
 from torchvision import transforms
 

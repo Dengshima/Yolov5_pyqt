@@ -7,8 +7,8 @@ import os
 import sys
 import argparse
 import time
-import dataloader
-import dce_model
+from . import dataloader, dce_model
+# import dce_model
 import numpy as np
 from torchvision import transforms
 from PIL import Image

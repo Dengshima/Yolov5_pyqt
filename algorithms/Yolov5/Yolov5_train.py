@@ -3,7 +3,7 @@ import os
 import glob
 import torch
 import yaml
-from torch.multiprocessing import Process, set_start_method
+# from torch.multiprocessing import Process, set_start_method
 import torch.distributed as dist
 import torch.nn.functional as F
 import torch.optim as optim
@@ -12,10 +12,10 @@ import torch.utils.data
 from torch.utils.tensorboard import SummaryWriter
 
 import test  # import test.py to get mAP after each epoch
-from models.yolo import Model
-from utils import google_utils, torch_utils
-from utils.datasets import *
-from utils.utils import *
+from .models.yolo import Model
+from .utils import google_utils, torch_utils
+from .utils.datasets import *
+from .utils.utils import *
 
 
 def train(hyp, opt, outputqueue):

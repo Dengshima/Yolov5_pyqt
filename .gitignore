@@ -1,4 +1,5 @@
 __pycache__/
+ui/__pycache__
 algorithms/RmFog/__pycache__/
 algorithms/Yolov5/__pycache__/
 algorithms/Yolov5/models/__pycache__/

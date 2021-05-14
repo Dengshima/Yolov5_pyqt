@@ -43,7 +43,7 @@ def lowlight(image_path):
     # result_path = image_path
     file_name = image_path.split('/')[-1]
 
-    with open('config.yaml', 'r') as f:
+    with open('config.yaml', 'r', encoding='UTF-8') as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
 
     result_path = config['lowlight']

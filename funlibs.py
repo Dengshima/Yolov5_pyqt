@@ -71,7 +71,7 @@ def addTableRow(table, row_data):
 
 def plotline(origin, colums, rows, h=0, v=0):
     save_name = os.path.basename(origin)
-    with open('config.yaml', 'r') as f:
+    with open('config.yaml', 'r', encoding='UTF-8') as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
     init_dir(config['croped'])
     save_name = config['croped'] + '/' + save_name

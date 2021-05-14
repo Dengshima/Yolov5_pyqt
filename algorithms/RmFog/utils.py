@@ -79,7 +79,7 @@ def save_image(dehaze, image_name, category):
     dehaze_images = torch.split(dehaze, 1, dim=0)
     batch_num = len(dehaze_images)
 
-    with open('config.yaml', 'r') as f:
+    with open('config.yaml', 'r', encoding='UTF-8') as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
     result_dir = config['fog_dir'][3]
 

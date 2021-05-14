@@ -30,7 +30,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         super(MyWindow, self).__init__(parent)
         self.setupUi(self)
         # 读取配置文件
-        with open('config.yaml', 'r') as f:
+        with open('config.yaml', 'r', encoding='UTF-8') as f:
             self.config = yaml.load(f, Loader=yaml.FullLoader)
 
         # 设置按钮响应函数**************************************

@@ -32,7 +32,7 @@ class TrainWindow(QDialog, Ui_Dialog):
         '''
         根据预定配置，设置默认参数
         '''
-        with open('config.yaml', 'r') as f:
+        with open('config.yaml', 'r', encoding='UTF-8') as f:
             self.config = yaml.load(f, Loader=yaml.FullLoader)
         self.lineEdit.setText(self.dataset)
         self.lineEdit_2.setText(self.weights)

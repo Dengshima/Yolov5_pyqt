@@ -10,7 +10,7 @@ Enlighten with ZeroDCE, Dehaze with GridDehaceNet, and Detect the object with Yo
 Implemented with Pyqt5.
 
 The main UI:
-<img src="https://github.com/gentlemanarch/qt_ObjectDetect/others/sh.png" alt=""/>
+<img src="https://github.com/gentlemanarch/qt_ObjectDetect/blob/master/others/sh.png" alt=""/>
 
 ### ref:
 

@@ -12,3 +12,5 @@ dist/
 build/
 runs/
 tags
+.DS_Store
+*/.DS_Store
